@@ -6,46 +6,38 @@ using System.Threading.Tasks;
 
 namespace Homework3A
 {
-    class FindFactorial
+    class FindDHMS
     {
         static void Main()
         {
-            Console.WriteLine("Please enter the integer you would like to calculate the factorial for...");
+            int secPerDay = 86400;  //Constants needed for calculations
+            int secPerHour = 3600;
+            int secPerMin = 60;
+            int userSeconds;
 
-            string userInput = Console.ReadLine();  //intilize userEntry with user kybd input
-            int userInt;  //Storage for parse value of userEntry
-            int sum = 1;  //Storage for partial result of the iterative factorial calculation.
+            //begin
+            Console.WriteLine("Please enter total number of seconds...");
+            string userInput = Console.ReadLine();
 
-            if (int.TryParse(userInput, out userInt)) //if string parses to an int:  store in userInt
+            if (int.TryParse(userInput, out userSeconds))
             {
-                if (userInt == 0) //Check for 0
-                {
-                    Console.WriteLine("The Factorial of 0 is defined as 1");
-                    Console.ReadLine();
-                }
-
-                else if (userInt < 0)  //check for negative integer
-                {
-                    Console.WriteLine("The factorial of a negative integer is undefined");
-                    Console.ReadLine();
-                }
-
-                else //positive integer!!!  Find factorial
-                {
-                    for (; userInt > 0; userInt--)
-                    {
-                        sum = sum * userInt;   //accumulate the sum of the iterations to find factorial.  First interation sets sum to userInt.  Covers rule 1! = 1
-                    }
-                    Console.WriteLine("The Factorial of " + userInput + " is " + sum);
-                    Console.ReadLine();
-                }
-
+                //Print Days
+                Console.WriteLine("Days: {0}", userSeconds / secPerDay);     //Print the whole days
+                userSeconds = userSeconds % secPerDay;                       //Convert the remanider back into seconds
+                Console.WriteLine("Hours: {0}", userSeconds / secPerHour);   //Print the whole hours
+                userSeconds = userSeconds % secPerHour;                      //Convert the remanider back into seconds
+                Console.WriteLine("Minutes: {0}", userSeconds / secPerMin);  //Print the whole minutes
+                userSeconds = userSeconds % secPerMin;                       //Convert the remanider back into seconds
+                Console.WriteLine("Seconds: " +userSeconds);
+                Console.ReadLine();
             }
-            else  //Not an interger
+            else
             {
                 Console.WriteLine("You did not enter an integer!");
                 Console.ReadLine();
             }
+
+//Add the logic for negatives
         }
     }
 }
